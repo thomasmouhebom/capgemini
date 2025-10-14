@@ -1,11 +1,11 @@
 node {
     stage('Clone') { 
-        git 'clone https://github.com/thomasmouhebom/capgemini.git'
+        git 'https://github.com/thomasmouhebom/capgemini.git'
     }
     stage('Build') { 
-       sh label: '' , script: 'javac Main.java'
+       sh label: '', script: 'javac Main.java'
     }
-    stage('run') { 
-       sh label: '' , script: 'java Main'
+    stage('Run') { 
+       sh label: '', script: 'java Main'
     }
 }
