@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  db:
+    image: arm64v8/mysql:8.0
+    container_name: wp-db
+    restart: always
+    environment:
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wpuser
+      MYSQL_PASSWORD: wppass
+      MYSQL_ROOT_PASSWORD: rootpass
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - wp-net
+
+  wordpress:
+    image: arm64v8/wordpress:latest
+    container_name: wp-site
+    depends_on:
+      - db
+    ports:
+      - "8085:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: wpuser
+      WORDPRESS_DB_PASSWORD: wppass
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - wp_data:/var/www/html
+    networks:
+      - wp-net
+
+networks:
+  wp-net:
+
+volumes:
+  db_data:
+  wp_data:
