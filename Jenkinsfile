@@ -51,7 +51,7 @@ pipeline {
             echo "🎉 Déploiement réussi ! Site disponible sur ${WP_URL}"
         }
         failure {
-            echo "🚨 Le déploiement a échoué."
+            echo "🚨 Le déploiement a échoué... "
         }
     }
 }
